@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Все новости — CyberXGaming{% endblock %}
+
+{% block content %}
+<section class="all-news">
+    <!-- Заголовок раздела -->
+    <header class="all-news__header">
+        <h1 class="all-news__title">📰 ВСЕ НОВОСТИ</h1>
+    </header>
+
+    <!-- Сетка новостей -->
+    {% if page_obj %}
+        <div class="news-grid">
+            {% for item in page_obj %}
+                <article class="news-card">
+
+                    <!-- BADGES -->
+                    {% if item.badge.all %}
+                        <div class="news-card__badges">
+                            {% for b in item.badge.all|slice:":3" %}
+                                <span class="news-card__badge news-card__badge--{{ b.name|lower }}">
+                                    {{ b.name|upper }}
+                                </span>
+                            {% endfor %}
+                            {% if item.badge.all|length > 3 %}
+                                <span class="news-card__badge news-card__badge--more">
+                                    +{{ item.badge.all|length|add:"-3" }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <!-- IMAGE -->
+                    <div class="news-card__image">
+                        {% if item.pictures.first %}
+                            <img src="{{ item.pictures.first.image.url }}"
+                                 alt="{{ item.title }}"
+                                 class="news-card__image-img"
+                                 loading="lazy">
+                        {% else %}
+                            <span class="news-card__image-placeholder">🖼️</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="news-card__content">
+                        <div class="news-card__meta">
+                            <span class="news-card__date">{{ item.pub_date|date:"d.m.Y" }}</span>
+                            <span class="news-card__category">
+                                {{ item.categories.first.name|default:"—"|upper }}
+                            </span>
+                        </div>
+                        <h3 class="news-card__title">{{ item.title }}</h3>
+                        <p class="news-card__excerpt">{{ item.content|striptags|truncatewords:20 }}</p>
+                        <a href="{% url 'get_news_page' item.slug %}" class="news-card__btn">Читать ▸</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+
+        <!-- Пагинация -->
+        {% if page_obj.has_other_pages %}
+            <nav class="all-news__pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}"
+                       class="all-news__page-btn">◂ НАЗАД</a>
+                {% endif %}
+
+                <span class="all-news__page-info">СТРАНИЦА {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}"
+                       class="all-news__page-btn">ВПЕРЕД ▸</a>
+                {% endif %}
+            </nav>
+        {% endif %}
+    {% else %}
+        <!-- Заглушка, если новостей нет -->
+        <div class="empty-news">
+            <div class="empty-news__icon">👾</div>
+            <h3 class="empty-news__title">СИСТЕМА ОЖИДАЕТ ДАННЫХ</h3>
+            <p class="empty-news__text">Новости пока не добавлены. Возвращайтесь позже!</p>
+            <div class="empty-news__loader">
+                <div class="empty-news__loader-bar"></div>
+            </div>
+            <button onclick="window.location.reload();" class="empty-news__btn">ОБНОВИТЬ ▸</button>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

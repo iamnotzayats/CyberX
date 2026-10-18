@@ -1,125 +1,82 @@
-{% extends 'html/../base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-<section class="news-section">
-    <div class="news-header">
-        <h2 class="news-title">📰 Последние новости</h2>
-        <a href="#" class="news-all-link">Смотреть все ▶</a>
-    </div>
+{% if news %}
+    <section class="news-section">
+        <div class="news-header">
+            <h2 class="news-title">📰 Последние новости</h2>
+            <a href="{% url 'all_news' %}" class="news-all-link">Смотреть все ▶</a>
+        </div>
 
-    <div class="news-grid">
+        <div class="news-grid">
+            {% for item in news %}
+            <article class="news-card">
 
-        <!-- Карточка 1 -->
-        <article class="news-card">
-            <div class="news-card__badge news-card__badge--hot">🔥 HOT</div>
-            <div class="news-card__image">
-                <!-- Заглушка вместо картинки. В реале: <img src="{{ news.image.url }}"> -->
-                <span class="news-card__image-placeholder">🖼️</span>
-            </div>
-            <div class="news-card__content">
-                <div class="news-card__meta">
-                    <span class="news-card__date">18.10.2026</span>
-                    <span class="news-card__category">КИБЕРСПОРТ</span>
+                {# ---------- BADGES (все) ---------- #}
+                {% with badges=item.badge.all %}
+                    {% if badges %}
+                        <div class="news-card__badges">
+                            {% for b in badges|slice:":3" %}
+                                <span class="news-card__badge news-card__badge--{{ b.name|lower }}">
+                                    {{ b.name }}
+                                </span>
+                            {% endfor %}
+                            {% if badges|length > 3 %}
+                                <span class="news-card__badge news-card__badge--more">
+                                    +{{ badges|length|add:"-3" }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                {# ---------- ПЕРВАЯ КАРТИНКА (на всю площадь) ---------- #}
+                <div class="news-card__image">
+                    {% with pic=item.pictures.first %}
+                        {% if pic and pic.image %}
+                            <img src="{{ pic.image.url }}"
+                                 alt="{{ item.title }}"
+                                 class="news-card__image-img"
+                                 loading="lazy">
+                        {% else %}
+                            <span class="news-card__image-placeholder">🖼️</span>
+                        {% endif %}
+                    {% endwith %}
                 </div>
-                <h3 class="news-card__title">Турнир CyberX Masters 2026 объявлен открытым</h3>
-                <p class="news-card__excerpt">
-                    Регистрация на главный турнир года уже открыта. Призовой фонд — 1 000 000 ₽.
-                </p>
-                <a href="#" class="news-card__btn">Читать ▸</a>
-            </div>
-        </article>
 
-        <!-- Карточка 2 -->
-        <article class="news-card">
-            <div class="news-card__badge news-card__badge--new">✦ NEW</div>
-            <div class="news-card__image">
-                <span class="news-card__image-placeholder">🖼️</span>
-            </div>
-            <div class="news-card__content">
-                <div class="news-card__meta">
-                    <span class="news-card__date">17.10.2026</span>
-                    <span class="news-card__category">КОМАНДЫ</span>
+                <div class="news-card__content">
+                    <div class="news-card__meta">
+                        <span class="news-card__date">{{ item.pub_date|date:"d.m.Y" }}</span>
+                        <span class="news-card__category">
+                            {{ item.categories.first.name|default:"—" }}
+                        </span>
+                    </div>
+                    <h3 class="news-card__title">{{ item.title }}</h3>
+                    <p class="news-card__excerpt">{{ item.content|truncatewords:20 }}</p>
+                    <a href="{% url 'get_news_page' item.slug %}" class="news-card__btn">Читать ▸</a>
                 </div>
-                <h3 class="news-card__title">Team Phoenix подписала нового капитана</h3>
-                <p class="news-card__excerpt">
-                    После ухода легенды состава, команда нашла замену среди топ-игроков региона.
-                </p>
-                <a href="#" class="news-card__btn">Читать ▸</a>
-            </div>
-        </article>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+{% else %}
+    <section class="news-section">
+        <div class="news-header">
+            <h2 class="news-title">📰 Последние новости</h2>
+        </div>
 
-        <!-- Карточка 3 -->
-        <article class="news-card">
-            <div class="news-card__image">
-                <span class="news-card__image-placeholder">🖼️</span>
-            </div>
-            <div class="news-card__content">
-                <div class="news-card__meta">
-                    <span class="news-card__date">16.10.2026</span>
-                    <span class="news-card__category">ТРАНСЛЯЦИИ</span>
-                </div>
-                <h3 class="news-card__title">Стрим-марафон: 24 часа с топ-игроками</h3>
-                <p class="news-card__excerpt">
-                    В эти выходные наши партнёры проведут благотворительный стрим с розыгрышами.
-                </p>
-                <a href="#" class="news-card__btn">Читать ▸</a>
-            </div>
-        </article>
-        <article class="news-card">
-            <div class="news-card__badge news-card__badge--new">✦ NEW</div>
-            <div class="news-card__image">
-                <span class="news-card__image-placeholder">🖼️</span>
-            </div>
-            <div class="news-card__content">
-                <div class="news-card__meta">
-                    <span class="news-card__date">17.10.2026</span>
-                    <span class="news-card__category">КОМАНДЫ</span>
-                </div>
-                <h3 class="news-card__title">Team Phoenix подписала нового капитана</h3>
-                <p class="news-card__excerpt">
-                    После ухода легенды состава, команда нашла замену среди топ-игроков региона.
-                </p>
-                <a href="#" class="news-card__btn">Читать ▸</a>
-            </div>
-        </article>
+        <div class="empty-news">
+            <div class="empty-news__icon">👾</div>
+            <h3 class="empty-news__title">СИСТЕМА ОЖИДАЕТ ДАННЫХ</h3>
+            <p class="empty-news__text">Новости пока не добавлены. Возвращайтесь позже!</p>
 
-        <!-- Карточка 3 -->
-        <article class="news-card">
-            <div class="news-card__image">
-                <span class="news-card__image-placeholder">🖼️</span>
+            <div class="empty-news__loader">
+                <div class="empty-news__loader-bar"></div>
             </div>
-            <div class="news-card__content">
-                <div class="news-card__meta">
-                    <span class="news-card__date">16.10.2026</span>
-                    <span class="news-card__category">ТРАНСЛЯЦИИ</span>
-                </div>
-                <h3 class="news-card__title">Стрим-марафон: 24 часа с топ-игроками</h3>
-                <p class="news-card__excerpt">
-                    В эти выходные наши партнёры проведут благотворительный стрим с розыгрышами.
-                </p>
-                <a href="#" class="news-card__btn">Читать ▸</a>
-            </div>
-        </article>
-        <article class="news-card">
-            <div class="news-card__badge news-card__badge--new">✦ NEW</div>
-            <div class="news-card__image">
-                <span class="news-card__image-placeholder">🖼️</span>
-            </div>
-            <div class="news-card__content">
-                <div class="news-card__meta">
-                    <span class="news-card__date">17.10.2026</span>
-                    <span class="news-card__category">КОМАНДЫ</span>
-                </div>
-                <h3 class="news-card__title">Team Phoenix подписала нового капитана</h3>
-                <p class="news-card__excerpt">
-                    После ухода легенды состава, команда нашла замену среди топ-игроков региона.
-                </p>
-                <a href="#" class="news-card__btn">Читать ▸</a>
-            </div>
-        </article>
 
-
-    </div>
-</section>
+            <button onclick="window.location.reload();" class="empty-news__btn">ОБНОВИТЬ ▸</button>
+        </div>
+    </section>
+{% endif %}
 {% endblock %}

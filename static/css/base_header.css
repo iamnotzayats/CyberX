@@ -1,41 +1,34 @@
 /* ============================================================
    RETRO-ARCADE THEME 🕹️
-   CRT-скан-линии + кислотный неон + пиксельные шрифты
    ============================================================ */
 :root {
-    /* Фоны */
     --bg-canvas:      #0b0014;
     --bg-header:      #14002a;
     --bg-inset:       #1a0038;
     --bg-hover:       #26004d;
     --bg-active:      #330066;
 
-    /* Границы */
     --border-dim:     #4a0080;
     --border-bright:  #a020f0;
 
-    /* Текст */
     --fg-default:     #f0e6ff;
     --fg-muted:       #a080c0;
     --fg-dim:         #604080;
 
-    /* Кислотный неон */
     --neon-magenta:   #ff00ff;
     --neon-cyan:      #00ffff;
     --neon-yellow:    #ffff00;
     --neon-green:     #39ff14;
     --neon-orange:    #ff6b00;
 
-    /* Шрифты */
     --font-pixel:     "Press Start 2P", "Courier New", monospace;
     --font-mono:      "VT323", "Courier New", monospace;
 
-    /* Эффекты */
     --glow-magenta:   0 0 8px var(--neon-magenta), 0 0 20px rgba(255,0,255,.5);
     --glow-cyan:      0 0 8px var(--neon-cyan), 0 0 20px rgba(0,255,255,.5);
     --glow-yellow:    0 0 8px var(--neon-yellow), 0 0 20px rgba(255,255,0,.5);
     --scanline-opacity: .12;
-    --transition: .15s steps(3);   /* ступенчатая анимация = «пиксельность» */
+    --transition: .15s steps(3);
 }
 
 * { box-sizing: border-box; }
@@ -53,14 +46,13 @@ body {
     background-image: radial-gradient(ellipse at center, rgba(160,32,240,.08) 0%, transparent 70%);
     background-attachment: fixed;
 
-    /* 👇 ВОТ ЭТИ 3 СТРОКИ ПРИЖИМАЮТ ФУТЕР 👇 */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 main {
-    flex: 1; /* Заставляет main занимать всё свободное место */
+    flex: 1;
 }
 
 h1, h2 {
@@ -81,17 +73,15 @@ h1, h2 {
 .gh-header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     background: var(--bg-header);
     border-bottom: 3px solid var(--neon-magenta);
     box-shadow:
         0 0 12px var(--neon-magenta),
         inset 0 -1px 0 rgba(0,255,255,.3),
         0 4px 30px rgba(255,0,255,.25);
-    overflow: hidden;
 }
 
-/* CRT-скан-линии поверх шапки */
 .gh-header::after {
     content: "";
     position: absolute;
@@ -108,7 +98,6 @@ h1, h2 {
     z-index: 2;
 }
 
-/* Медленная «бегущая» полоса CRT по шапке */
 .gh-header::before {
     content: "";
     position: absolute;
@@ -116,12 +105,7 @@ h1, h2 {
     right: 0;
     height: 40%;
     top: -40%;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(0, 255, 255, .06),
-        transparent
-    );
+    background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, .06), transparent);
     pointer-events: none;
     animation: crt-flicker 6s linear infinite;
     z-index: 2;
@@ -166,7 +150,6 @@ h1, h2 {
     flex-shrink: 0;
     background: var(--neon-yellow);
     color: #0b0014;
-    /* «пиксельные» углы через clip-path */
     clip-path: polygon(
         0 6px, 6px 6px, 6px 0,
         calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
@@ -188,7 +171,6 @@ h1, h2 {
     filter: brightness(1.15);
 }
 
-/* Название сайта */
 .gh-brand__name {
     font-family: var(--font-pixel);
     font-size: 14px;
@@ -196,25 +178,16 @@ h1, h2 {
     letter-spacing: .05em;
     text-transform: uppercase;
     color: var(--neon-yellow);
-    text-shadow:
-        2px 2px 0 var(--neon-magenta),
-        -2px -2px 0 var(--neon-cyan),
-        0 0 12px rgba(255,255,0,.5);
+    text-shadow: 2px 2px 0 var(--neon-magenta), -2px -2px 0 var(--neon-cyan), 0 0 12px rgba(255,255,0,.5);
     white-space: nowrap;
     transition: text-shadow var(--transition);
 }
 .gh-brand__accent {
     color: var(--neon-cyan);
-    text-shadow:
-        2px 2px 0 var(--neon-magenta),
-        -2px -2px 0 var(--neon-yellow),
-        0 0 12px rgba(0,255,255,.6);
+    text-shadow: 2px 2px 0 var(--neon-magenta), -2px -2px 0 var(--neon-yellow), 0 0 12px rgba(0,255,255,.6);
 }
 .gh-brand:hover .gh-brand__name {
-    text-shadow:
-        2px 2px 0 var(--neon-magenta),
-        -2px -2px 0 var(--neon-cyan),
-        0 0 20px rgba(255,255,0,.9);
+    text-shadow: 2px 2px 0 var(--neon-magenta), -2px -2px 0 var(--neon-cyan), 0 0 20px rgba(255,255,0,.9);
 }
 
 /* ---------- Навигация ---------- */
@@ -255,7 +228,7 @@ h1, h2 {
 
 /* ---------- Профиль (Аватар + Имя) ---------- */
 .gh-user {
-    margin-left: auto; /* прижимает профиль к правому краю */
+    margin-left: auto;
     display: flex;
     align-items: center;
 }
@@ -263,12 +236,11 @@ h1, h2 {
 .gh-user__profile {
     display: flex;
     align-items: center;
-    gap: 12px; /* расстояние между ником и аватаркой */
+    gap: 12px;
     text-decoration: none;
     transition: transform var(--transition);
 }
 
-/* Имя пользователя */
 .gh-user__name {
     font-family: var(--font-pixel);
     font-size: 10px;
@@ -277,13 +249,11 @@ h1, h2 {
     text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
     transition: color var(--transition), text-shadow var(--transition);
 }
-
 .gh-user__profile:hover .gh-user__name {
     color: var(--neon-yellow);
     text-shadow: var(--glow-yellow);
 }
 
-/* Аватарка */
 .gh-user__avatar {
     position: relative;
     display: flex;
@@ -304,7 +274,6 @@ h1, h2 {
     text-shadow: 0 0 6px var(--neon-yellow);
     transition: transform var(--transition), box-shadow var(--transition);
 }
-
 .gh-user__avatar::after {
     content: "P1";
     position: absolute;
@@ -317,10 +286,60 @@ h1, h2 {
     text-shadow: 0 0 4px var(--neon-yellow);
     letter-spacing: .1em;
 }
-
 .gh-user__profile:hover .gh-user__avatar {
     transform: scale(1.06);
     box-shadow: 0 0 20px var(--neon-yellow), 0 0 40px rgba(255,255,0,.5);
+}
+
+/* ---------- Кнопки Вход / Регистрация ---------- */
+.gh-auth-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.gh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+    border: none;
+    white-space: nowrap;
+}
+
+.gh-btn--login {
+    color: #0b0014;
+    background: var(--neon-cyan);
+    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 12px var(--neon-cyan);
+}
+.gh-btn--login:hover {
+    filter: brightness(1.15);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 20px var(--neon-cyan);
+}
+
+.gh-btn--register {
+    color: #0b0014;
+    background: var(--neon-yellow);
+    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 12px var(--neon-yellow);
+}
+.gh-btn--register:hover {
+    filter: brightness(1.15);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 20px var(--neon-yellow);
+}
+
+.gh-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--neon-magenta), 0 0 8px currentColor;
 }
 
 /* ---------- Бургер ---------- */
@@ -356,18 +375,28 @@ h1, h2 {
    МОБИЛЬНАЯ ВЕРСИЯ ШАПКИ
    ============================================================ */
 @media (max-width: 900px) {
-    .gh-header__inner { gap: 12px; padding: 12px 16px; }
+    .gh-header__inner {
+        gap: 12px;
+        padding: 12px 16px;
+    }
 
     .gh-brand__name { font-size: 10px; }
-
-    /* Скрываем имя на мобилках, чтобы не ломать верстку */
     .gh-user__name { display: none; }
 
-    .gh-burger { display: flex; margin-left: 10px; }
+    .gh-user {
+        margin-left: 0;
+        margin-right: auto;
+    }
 
+    .gh-burger {
+        display: flex;
+        margin-left: auto;
+    }
+
+    /* ИСПРАВЛЕННОЕ ВЫПАДАЮЩЕЕ МЕНЮ */
     .gh-nav {
-        position: absolute;
-        top: 100%;
+        position: absolute; /* Меняем fixed на absolute */
+        top: 100%; /* Открывается строго под шапкой */
         left: 0;
         right: 0;
         flex-direction: column;
@@ -380,23 +409,36 @@ h1, h2 {
         opacity: 0;
         pointer-events: none;
         transition: opacity var(--transition), transform var(--transition);
-        z-index: 1;
+        z-index: 9999;
+        width: 100%;
+        box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
     }
+
     .gh-nav.is-open {
         transform: translateY(0);
         opacity: 1;
         pointer-events: auto;
     }
+
     .gh-nav__link {
         padding: 14px 16px;
         font-size: 11px;
         text-align: center;
     }
-    .gh-nav__link.is-active { box-shadow: var(--glow-cyan); }
+
+    .gh-nav__link.is-active {
+        box-shadow: var(--glow-cyan);
+    }
+}
+
+@media (max-width: 600px) {
+    .gh-btn--register {
+        display: none;
+    }
 }
 
 /* ============================================================
-   БОНУС: класс для контента «ARCADE CABINET»
+   БОНУС: ARCADE CABINET
    ============================================================ */
 .arcade-screen {
     position: relative;
@@ -429,64 +471,4 @@ h1, h2 {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50%      { opacity: 0; }
-}
-
-/* ---------- Кнопки Вход / Регистрация (для гостей) ---------- */
-.gh-auth-buttons {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.gh-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 16px;
-    font-family: var(--font-pixel);
-    font-size: 9px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 0;
-    cursor: pointer;
-    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
-    border: none;
-    white-space: nowrap;
-}
-
-/* Кнопка Вход (Циан) */
-.gh-btn--login {
-    color: #0b0014;
-    background: var(--neon-cyan);
-    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 12px var(--neon-cyan);
-}
-.gh-btn--login:hover {
-    filter: brightness(1.15);
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 20px var(--neon-cyan);
-}
-
-/* Кнопка Регистрация (Жёлтая) */
-.gh-btn--register {
-    color: #0b0014;
-    background: var(--neon-yellow);
-    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 12px var(--neon-yellow);
-}
-.gh-btn--register:hover {
-    filter: brightness(1.15);
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 20px var(--neon-yellow);
-}
-
-.gh-btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0 var(--neon-magenta), 0 0 8px currentColor;
-}
-
-/* На мобильных устройствах прячем кнопку «Регистрация», чтобы влезло */
-@media (max-width: 600px) {
-    .gh-btn--register {
-        display: none;
-    }
 }

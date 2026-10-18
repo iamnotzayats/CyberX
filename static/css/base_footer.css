@@ -3,7 +3,6 @@
    ============================================================ */
 .gh-footer {
     position: relative;
-    /* margin-top: 60px;  Убрал, так как main сам растягивается */
     background: var(--bg-header);
     border-top: 3px solid var(--neon-cyan);
     box-shadow:
@@ -14,7 +13,6 @@
     font-family: var(--font-mono);
 }
 
-/* CRT скан-линии на футере */
 .gh-footer::before {
     content: "";
     position: absolute;
@@ -31,7 +29,6 @@
     z-index: 10;
 }
 
-/* --- Бегущая строка сверху --- */
 .gh-footer__marquee {
     background: var(--neon-magenta);
     color: #0b0014;
@@ -146,7 +143,7 @@
     animation: blink 2s steps(2) infinite;
 }
 
-/* --- Мобильная версия футера --- */
+/* --- Мобильная версия --- */
 @media (max-width: 900px) {
     .gh-footer__inner {
         flex-direction: column;
