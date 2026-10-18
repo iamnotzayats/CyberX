@@ -5,21 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7dfc332d-dadd-488d-8b81-8522836158c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/CyberX.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cyberxclient/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/base_footer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/base_header.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/news.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/news.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyberxadmin/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxadmin/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyberxadmin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxadmin/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyberxclient/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxclient/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseLocalColorSettings">
+    <colors>
+      <entry key="cfdf1bd5-d725-49ca-bf1f-5617bb4d6b0b" value="" />
+    </colors>
+  </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="502" />
+    <option name="cachedIndexableFilesCount" value="33" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,10 +46,69 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8,
-  "fromUser": false
-}]]></component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.000000000000003" />
+      <entry key="MS500" value="1.0016988933037843" />
+      <entry key="S2" value="1.568473273530973" />
+      <entry key="S5" value="3.0639445070641997" />
+      <entry key="S10" value="4.20460739733444" />
+      <entry key="S30" value="5.308643669322811" />
+      <entry key="S60" value="5.64123758292912" />
+      <entry key="M2" value="5.840338042369526" />
+      <entry key="M5" value="7.122363099228273" />
+      <entry key="M10" value="10.883203919566823" />
+      <entry key="M15" value="13.948847721710404" />
+      <entry key="M30" value="19.966258460371524" />
+      <entry key="H1" value="33.58055532212122" />
+      <entry key="H2" value="64.48483490835724" />
+      <entry key="H4" value="102.92998917698368" />
+      <entry key="D1" value="161.70924136260095" />
+      <entry key="W1" value="175.55787944277193" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.8224948676078743E-29" />
+      <entry key="MS500" value="1.787035840744828E-6" />
+      <entry key="S2" value="0.036562283828044675" />
+      <entry key="S5" value="0.2662032334072802" />
+      <entry key="S10" value="0.5159488670471912" />
+      <entry key="S30" value="0.8020514401446042" />
+      <entry key="S60" value="0.8957201151487815" />
+      <entry key="M2" value="0.9782942705175723" />
+      <entry key="M5" value="1.9007885123302024" />
+      <entry key="M10" value="3.9708247421479355" />
+      <entry key="M15" value="5.439358679418162" />
+      <entry key="M30" value="7.7949363727800325" />
+      <entry key="H1" value="10.414373864636229" />
+      <entry key="H2" value="13.995782994880905" />
+      <entry key="H4" value="17.647856424499302" />
+      <entry key="D1" value="22.67348326245648" />
+      <entry key="W1" value="23.80252956110507" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.901250462610833" />
+      <entry key="MS500" value="0.9810675469560323" />
+      <entry key="S2" value="1.5759244641210173" />
+      <entry key="S5" value="3.2596688735877026" />
+      <entry key="S10" value="4.652103271107488" />
+      <entry key="S30" value="6.074845738379814" />
+      <entry key="S60" value="6.516868483908472" />
+      <entry key="M2" value="6.807649676859055" />
+      <entry key="M5" value="9.013968425585718" />
+      <entry key="M10" value="14.843383093450923" />
+      <entry key="M15" value="19.37807995519566" />
+      <entry key="M30" value="27.75360683087081" />
+      <entry key="H1" value="43.989698122956426" />
+      <entry key="H2" value="78.47702938362863" />
+      <entry key="H4" value="120.57555927785971" />
+      <entry key="D1" value="184.38223117566753" />
+      <entry key="W1" value="199.36033490946184" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3KpAyNf7BaL9D6kwThf5Cn4zahW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -39,25 +116,38 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django Server.CyberX.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "dev",
     "junie.onboarding.icon.badge.shown": "true",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
     "to.speed.mode.migration.done": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CyberX\static" />
+      <recent name="D:\CyberX\templates" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="CyberX" type="Python.DjangoServer" factoryName="Django server">
       <module name="CyberX" />
@@ -66,6 +156,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="cyberxadmin.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -100,7 +191,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1792244389372</updated>
-      <workItem from="1792244390381" duration="1035000" />
+      <workItem from="1792244390381" duration="8649000" />
+      <workItem from="1792268201384" duration="329000" />
+      <workItem from="1792309379880" duration="1910000" />
     </task>
     <servers />
   </component>
