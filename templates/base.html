@@ -39,7 +39,7 @@
         <div class="gh-user">
             {% if user.is_authenticated %}
                 <!-- Если пользователь авторизован -->
-                <a href="{% url 'profile' %}" class="gh-user__profile" aria-label="Профиль">
+                <a href="" class="gh-user__profile" aria-label="Профиль">
                     <span class="gh-user__name">{{ user.username }}</span>
                     <span class="gh-user__avatar">
                         <span>{{ user.username|first|upper }}</span>

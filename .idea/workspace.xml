@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7dfc332d-dadd-488d-8b81-8522836158c1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cyberxclient/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/base_footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/base_header.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/news.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/news.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CyberX.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CyberX.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyberxadmin/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxadmin/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cyberxadmin/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxadmin/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cyberxclient/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxclient/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyberxclient/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxclient/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cyberxclient/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/cyberxclient/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +29,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
         <option value="CSS File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -48,61 +44,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.000000000000003" />
-      <entry key="MS500" value="1.0016988933037843" />
-      <entry key="S2" value="1.568473273530973" />
-      <entry key="S5" value="3.0639445070641997" />
-      <entry key="S10" value="4.20460739733444" />
-      <entry key="S30" value="5.308643669322811" />
-      <entry key="S60" value="5.64123758292912" />
-      <entry key="M2" value="5.840338042369526" />
-      <entry key="M5" value="7.122363099228273" />
-      <entry key="M10" value="10.883203919566823" />
-      <entry key="M15" value="13.948847721710404" />
-      <entry key="M30" value="19.966258460371524" />
-      <entry key="H1" value="33.58055532212122" />
-      <entry key="H2" value="64.48483490835724" />
-      <entry key="H4" value="102.92998917698368" />
-      <entry key="D1" value="161.70924136260095" />
-      <entry key="W1" value="175.55787944277193" />
+      <entry key="MS100" value="1.0000000030681155" />
+      <entry key="MS500" value="1.0198323575940595" />
+      <entry key="S2" value="1.3752697743785927" />
+      <entry key="S5" value="1.6756743530089424" />
+      <entry key="S10" value="1.8219941319796282" />
+      <entry key="S30" value="1.9367552865289586" />
+      <entry key="S60" value="1.9847959208344441" />
+      <entry key="M2" value="3.007863810403664" />
+      <entry key="M5" value="15.75523760810265" />
+      <entry key="M10" value="36.94853321522219" />
+      <entry key="M15" value="51.59037614297909" />
+      <entry key="M30" value="78.99154935396217" />
+      <entry key="H1" value="110.14718635149715" />
+      <entry key="H2" value="152.20845795233024" />
+      <entry key="H4" value="201.47241977217973" />
+      <entry key="D1" value="280.9340246738204" />
+      <entry key="W1" value="300.5139753440687" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.8224948676078743E-29" />
-      <entry key="MS500" value="1.787035840744828E-6" />
-      <entry key="S2" value="0.036562283828044675" />
-      <entry key="S5" value="0.2662032334072802" />
-      <entry key="S10" value="0.5159488670471912" />
-      <entry key="S30" value="0.8020514401446042" />
-      <entry key="S60" value="0.8957201151487815" />
-      <entry key="M2" value="0.9782942705175723" />
-      <entry key="M5" value="1.9007885123302024" />
-      <entry key="M10" value="3.9708247421479355" />
-      <entry key="M15" value="5.439358679418162" />
-      <entry key="M30" value="7.7949363727800325" />
-      <entry key="H1" value="10.414373864636229" />
-      <entry key="H2" value="13.995782994880905" />
-      <entry key="H4" value="17.647856424499302" />
-      <entry key="D1" value="22.67348326245648" />
-      <entry key="W1" value="23.80252956110507" />
+      <entry key="MS100" value="5.796030688176235E-13" />
+      <entry key="MS500" value="0.0035696541024585944" />
+      <entry key="S2" value="0.2444311403025582" />
+      <entry key="S5" value="0.569197014537439" />
+      <entry key="S10" value="0.7544514659919742" />
+      <entry key="S30" value="0.910354274173731" />
+      <entry key="S60" value="0.9541293498781133" />
+      <entry key="M2" value="0.9800254964550216" />
+      <entry key="M5" value="1.176242686355638" />
+      <entry key="M10" value="1.7810243610967358" />
+      <entry key="M15" value="2.4633238021850863" />
+      <entry key="M30" value="4.745485171604128" />
+      <entry key="H1" value="8.636377540592667" />
+      <entry key="H2" value="13.852075394285277" />
+      <entry key="H4" value="19.196988681509023" />
+      <entry key="D1" value="26.89324591186521" />
+      <entry key="W1" value="28.684374577253607" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.901250462610833" />
-      <entry key="MS500" value="0.9810675469560323" />
-      <entry key="S2" value="1.5759244641210173" />
-      <entry key="S5" value="3.2596688735877026" />
-      <entry key="S10" value="4.652103271107488" />
-      <entry key="S30" value="6.074845738379814" />
-      <entry key="S60" value="6.516868483908472" />
-      <entry key="M2" value="6.807649676859055" />
-      <entry key="M5" value="9.013968425585718" />
-      <entry key="M10" value="14.843383093450923" />
-      <entry key="M15" value="19.37807995519566" />
-      <entry key="M30" value="27.75360683087081" />
-      <entry key="H1" value="43.989698122956426" />
-      <entry key="H2" value="78.47702938362863" />
-      <entry key="H4" value="120.57555927785971" />
-      <entry key="D1" value="184.38223117566753" />
-      <entry key="W1" value="199.36033490946184" />
+      <entry key="MS100" value="7.72585742910494E-5" />
+      <entry key="MS500" value="0.17075748694524215" />
+      <entry key="S2" value="1.1537037327857682" />
+      <entry key="S5" value="1.978688040971399" />
+      <entry key="S10" value="2.4213188299672996" />
+      <entry key="S30" value="2.789217792451637" />
+      <entry key="S60" value="2.909089427300204" />
+      <entry key="M2" value="3.97238869978984" />
+      <entry key="M5" value="16.92278960113074" />
+      <entry key="M10" value="38.72202581302932" />
+      <entry key="M15" value="54.04645381171965" />
+      <entry key="M30" value="83.7300730186832" />
+      <entry key="H1" value="118.77751556412211" />
+      <entry key="H2" value="166.05592243659228" />
+      <entry key="H4" value="220.66632766516608" />
+      <entry key="D1" value="307.8265759555702" />
+      <entry key="W1" value="329.19824473321376" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -114,36 +110,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django Server.CyberX.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "dev",
-    "junie.onboarding.icon.badge.shown": "true",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.jshint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.jshint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.packages.toolwindow.project.migrated.to.right.top.v2": "true",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django Server.CyberX.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CyberX\cyberxclient" />
       <recent name="D:\CyberX\static" />
       <recent name="D:\CyberX\templates" />
     </key>

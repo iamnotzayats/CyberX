@@ -25,10 +25,12 @@ SECRET_KEY = 'django-insecure-vl+cew&m9qxte65s0h^=q9042z8=%40&9a7y%3db)%7wp1pw@z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
+
+AUTH_USER_MODEL = 'cyberxclient.Users'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -76,8 +78,12 @@ WSGI_APPLICATION = 'cyberxadmin.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cyberxdb',          # Имя базы данных
+        'USER': 'iamnotzayats',      # Имя пользователя
+        'PASSWORD': 'Sanekheavy1832.',       # Пароль
+        'HOST': '127.0.0.1',          # Адрес сервера (или localhost)
+        'PORT': '5432',               # Порт PostgreSQL по умолчанию
     }
 }
 
