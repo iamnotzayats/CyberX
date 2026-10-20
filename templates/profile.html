@@ -35,14 +35,37 @@
 
                 <h2 class="profile-username">{{ profile_user.username|upper }}</h2>
 
-                {% if profile_user.is_online %}
-                    <p class="profile-status profile-status--online">СТАТУС: ONLINE 🟢</p>
-                {% else %}
-                    <p class="profile-status profile-status--offline">СТАТУС: OFFLINE 🔴</p>
-                {% endif %}
+                <!-- ПАНЕЛЬ СТАТУСА -->
+                <div class="profile-status-panel">
+                    <!-- Сам статус по центру -->
+                    <div class="profile-status-main">
+                        {% if profile_user.is_online %}
+                            <span class="profile-status-value profile-status--online">
+                                <span class="profile-status-dot"></span> ONLINE
+                            </span>
+                        {% else %}
+                            <span class="profile-status-value profile-status--offline">
+                                <span class="profile-status-dot"></span> OFFLINE
+                            </span>
+                        {% endif %}
+                    </div>
 
-                <div class="profile-joined">
-                    В ИГРЕ С: <span>{{ profile_user.date_joined|date:"d.m.Y" }}</span>
+                    <!-- Остальная информация (была в сети, в игре с) -->
+                    <div class="profile-status-info">
+                        {% if not profile_user.is_online and profile_user.last_activity %}
+                            <div class="profile-status-row">
+                                <span class="profile-status-label">БЫЛ В СЕТИ</span>
+                                <span class="profile-last-seen-time">
+                                    {{ profile_user.last_activity|date:"d.m.Y" }} <span class="time">{{ profile_user.last_activity|date:"H:i" }}</span>
+                                </span>
+                            </div>
+                        {% endif %}
+
+                        <div class="profile-status-row">
+                            <span class="profile-status-label">В ИГРЕ С</span>
+                            <span class="profile-joined-date">{{ profile_user.date_joined|date:"d.m.Y" }}</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Форма загрузки аватара (показываем ТОЛЬКО владельцу профиля) -->

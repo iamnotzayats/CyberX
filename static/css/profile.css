@@ -130,39 +130,114 @@
     font-size: 16px;
     color: var(--neon-cyan);
     text-shadow: 0 0 8px rgba(0,255,255,.6);
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     word-break: break-all;
 }
 
-.profile-status {
-    font-family: var(--font-mono);
-    font-size: 16px;
-    margin: 0 0 15px 0;
-    text-transform: uppercase;
-    letter-spacing: .05em;
+/* ---------- ПАНЕЛЬ СТАТУСА ИГРОКА ---------- */
+.profile-status-panel {
+    background: rgba(20, 0, 42, 0.6);
+    border: 2px solid var(--border-dim);
+    padding: 15px 16px;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 10px rgba(160, 32, 240, 0.1);
 }
 
-/* Онлайн (Зеленый) */
+/* Сам статус по центру */
+.profile-status-main {
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed rgba(74, 0, 128, 0.5);
+}
+
+.profile-status-value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-pixel);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+.profile-status-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
 .profile-status--online {
     color: var(--neon-green);
-    text-shadow: 0 0 6px rgba(57,255,20,.5);
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
+}
+.profile-status--online .profile-status-dot {
+    background: var(--neon-green);
+    box-shadow: 0 0 12px var(--neon-green);
+    animation: pulse-dot 1.5s infinite alternate;
 }
 
-/* Оффлайн (Магента) */
 .profile-status--offline {
     color: var(--neon-magenta);
-    text-shadow: 0 0 6px rgba(255,0,255,.5);
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+}
+.profile-status--offline .profile-status-dot {
+    background: var(--neon-magenta);
+    box-shadow: 0 0 8px var(--neon-magenta);
 }
 
-.profile-joined {
+/* Информация снизу (Был в сети, В игре с) */
+.profile-status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.profile-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: var(--font-mono);
-    font-size: 14px;
-    color: var(--fg-muted);
-    margin-bottom: 20px;
+    font-size: 15px;
+    letter-spacing: 0.05em;
 }
-.profile-joined span { color: var(--neon-orange); }
 
-.profile-avatar-form { margin-top: 15px; }
+.profile-status-label {
+    color: var(--fg-muted);
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+/* Время */
+.profile-last-seen-time {
+    color: var(--neon-magenta);
+    text-shadow: 0 0 4px rgba(255, 0, 255, 0.5);
+}
+.profile-last-seen-time .time {
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.profile-joined-date {
+    color: var(--neon-orange);
+}
+
+/* Анимация пульсации зеленой точки */
+@keyframes pulse-dot {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* ---------- АВАТАРКА (КНОПКА) ---------- */
+.profile-avatar-form {
+    margin-top: 15px;
+}
 
 .profile-upload-btn {
     display: inline-block;

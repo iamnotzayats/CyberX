@@ -279,7 +279,6 @@ def profile(request, username):
         request.user.last_activity = timezone.now()
         request.user.save(update_fields=['last_activity'])
 
-    # 3. Передаем профиль этого пользователя в шаблон
     return render(request, 'profile.html', {
         'page_title': f'Профиль — {profile_user.username}',
         'profile_user': profile_user, # <-- Передаем того, чей профиль открыт

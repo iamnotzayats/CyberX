@@ -32,15 +32,6 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'cyberxclient.Users'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True
-# EMAIL_HOST_USER = 'cyberxgaming@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'dcnyodawedzixhim'
-# DEFAULT_FROM_EMAIL = 'CyberXGaming <твой_email@yandex.ru>'
-
-
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Хранить сессии в БД
 SESSION_COOKIE_AGE = 1209600  # 2 недели (в секундах)
 SESSION_SAVE_EVERY_REQUEST = True  # Продлевать сессию при каждом запросе
