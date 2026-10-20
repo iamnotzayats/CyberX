@@ -33,7 +33,14 @@
                     <div class="profile-rank">P1</div>
                 </div>
 
-                <h2 class="profile-username">{{ profile_user.username|upper }}</h2>
+                <!-- Ник + Метка админа -->
+                <div class="profile-name-wrap">
+                    <h2 class="profile-username">{{ profile_user.username|upper }}</h2>
+
+                    {% if profile_user.is_staff or profile_user.is_superuser %}
+                        <span class="profile-admin-badge">ADMIN</span>
+                    {% endif %}
+                </div>
 
                 <!-- ПАНЕЛЬ СТАТУСА -->
                 <div class="profile-status-panel">

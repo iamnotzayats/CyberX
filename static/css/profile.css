@@ -125,13 +125,43 @@
     box-shadow: 0 0 10px var(--neon-magenta);
 }
 
+/* ---------- ИМЯ И МЕТКА АДМИНА ---------- */
+.profile-name-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
 .profile-username {
     font-family: var(--font-pixel);
     font-size: 16px;
     color: var(--neon-cyan);
     text-shadow: 0 0 8px rgba(0,255,255,.6);
-    margin: 0 0 15px 0;
+    margin: 0;
     word-break: break-all;
+}
+
+/* Неоновая метка ADMIN */
+.profile-admin-badge {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #0b0014;
+    background: var(--neon-orange);
+    padding: 4px 10px;
+    border-radius: 0;
+    box-shadow:
+        0 0 10px var(--neon-orange),
+        inset 0 0 4px rgba(255,255,255,0.5);
+    animation: admin-pulse 2s infinite alternate;
+}
+
+@keyframes admin-pulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.3); box-shadow: 0 0 15px var(--neon-orange); }
 }
 
 /* ---------- ПАНЕЛЬ СТАТУСА ИГРОКА ---------- */
