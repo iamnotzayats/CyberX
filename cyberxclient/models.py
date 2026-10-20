@@ -11,10 +11,19 @@ class Users(AbstractUser):
     first_name = None
     last_name = None
 
+    last_activity = models.DateTimeField(default=timezone.now)
+
     USERNAME_FIELD = 'username'
 
     class Meta:
         ordering = ('username',)
+
+    @property
+    def is_online(self):
+        # Считаем пользователя онлайн, если он активен в последние 5 минут
+        if self.last_activity:
+            return (timezone.now() - self.last_activity).total_seconds() < 60
+        return False
 
 
 def generate_unique_slug(klass, field):

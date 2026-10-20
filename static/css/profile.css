@@ -1,0 +1,256 @@
+/* ============================================================
+   СТРАНИЦА ПРОФИЛЯ (PLAYER DOSSIER)
+   ============================================================ */
+.profile-page {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px dashed var(--border-dim);
+    padding-bottom: 20px;
+}
+
+.profile-title {
+    font-family: var(--font-pixel);
+    font-size: 24px;
+    color: var(--neon-yellow);
+    text-shadow: 3px 3px 0 var(--neon-magenta), -3px -3px 0 var(--neon-cyan);
+    margin: 0;
+    letter-spacing: .05em;
+    animation: title-jitter 3s steps(2) infinite;
+}
+
+/* Сообщения */
+.profile-messages {
+    margin-bottom: 20px;
+}
+.profile-message {
+    padding: 12px;
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    text-align: center;
+    border: 2px solid;
+    margin-bottom: 10px;
+}
+.profile-message--success {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+    background: rgba(57,255,20,.1);
+    box-shadow: 0 0 12px rgba(57,255,20,.3);
+}
+.profile-message--error {
+    color: var(--neon-magenta);
+    border-color: var(--neon-magenta);
+    background: rgba(255,0,255,.1);
+    box-shadow: 0 0 12px rgba(255,0,255,.3);
+}
+
+/* Сетка */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* ---------- ЛЕВАЯ КОЛОНКА (КАРТОЧКА) ---------- */
+.profile-card {
+    background: var(--bg-header);
+    border: 3px solid var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0,255,255,.2);
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+}
+.profile-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,.1) 3px,
+        rgba(0,0,0,.1) 4px
+    );
+    mix-blend-mode: multiply;
+    z-index: 1;
+}
+.profile-card > * { position: relative; z-index: 2; }
+
+.profile-avatar-wrap {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 20px;
+}
+
+.profile-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 3px solid var(--neon-yellow);
+    box-shadow: 0 0 20px var(--neon-yellow);
+}
+
+.profile-avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-inset);
+    border: 3px solid var(--neon-yellow);
+    color: var(--neon-yellow);
+    font-family: var(--font-pixel);
+    font-size: 48px;
+    box-shadow: 0 0 20px var(--neon-yellow);
+}
+
+.profile-rank {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: var(--neon-magenta);
+    color: #0b0014;
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    padding: 4px 8px;
+    border: 2px solid var(--bg-header);
+    box-shadow: 0 0 10px var(--neon-magenta);
+}
+
+.profile-username {
+    font-family: var(--font-pixel);
+    font-size: 16px;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(0,255,255,.6);
+    margin: 0 0 10px 0;
+    word-break: break-all;
+}
+
+.profile-status {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+/* Онлайн (Зеленый) */
+.profile-status--online {
+    color: var(--neon-green);
+    text-shadow: 0 0 6px rgba(57,255,20,.5);
+}
+
+/* Оффлайн (Магента) */
+.profile-status--offline {
+    color: var(--neon-magenta);
+    text-shadow: 0 0 6px rgba(255,0,255,.5);
+}
+
+.profile-joined {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--fg-muted);
+    margin-bottom: 20px;
+}
+.profile-joined span { color: var(--neon-orange); }
+
+.profile-avatar-form { margin-top: 15px; }
+
+.profile-upload-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    color: #0b0014;
+    background: var(--neon-cyan);
+    cursor: pointer;
+    box-shadow: 2px 2px 0 var(--neon-magenta);
+    transition: all var(--transition);
+}
+.profile-upload-btn:hover {
+    filter: brightness(1.2);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--neon-magenta);
+}
+
+/* ---------- ПРАВАЯ КОЛОНКА (КОНТЕНТ) ---------- */
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Статистика */
+.profile-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--bg-header);
+    border: 2px solid var(--border-dim);
+    padding: 20px;
+    text-align: center;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+.stat-card:hover {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0,255,255,.2);
+}
+.stat-value {
+    font-family: var(--font-pixel);
+    font-size: 28px;
+    color: var(--neon-yellow);
+    text-shadow: 2px 2px 0 var(--neon-magenta);
+    margin-bottom: 10px;
+}
+.stat-label {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--fg-muted);
+    letter-spacing: .1em;
+}
+
+/* Опасная зона (выход) */
+.profile-danger-zone {
+    text-align: right;
+}
+
+.profile-logout-btn {
+    padding: 12px 20px;
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    color: var(--neon-magenta);
+    background: transparent;
+    border: 2px solid var(--neon-magenta);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.profile-logout-btn:hover {
+    background: rgba(255,0,255,.1);
+    box-shadow: 0 0 12px var(--neon-magenta);
+}
+
+/* ---------- АДАПТИВНОСТЬ ---------- */
+@media (max-width: 900px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+    .profile-stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    .stat-value { font-size: 20px; }
+    .stat-label { font-size: 12px; }
+    .profile-title { font-size: 18px; }
+    .profile-danger-zone { text-align: center; }
+}

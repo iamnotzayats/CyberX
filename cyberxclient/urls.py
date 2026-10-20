@@ -21,6 +21,9 @@ urlpatterns = [
     path('ajax/logout/', views.ajax_logout, name='ajax_logout'),
     path('ajax/password-reset/', views.ajax_password_reset, name='ajax_password_reset'),
     path('reset/<uidb64>/<token>/', views.reset_password_page, name='reset_password_page'),
+
+    # Маршруты для профиля
+    path('profile/<str:username>/', views.profile, name='profile'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

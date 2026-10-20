@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="profile-page">
+    <header class="profile-header">
+        <h1 class="profile-title">🎮 ДОСЬЕ ИГРОКА</h1>
+    </header>
+
+    <!-- Сообщения об успехе/ошибке -->
+    {% if messages %}
+        <div class="profile-messages">
+            {% for message in messages %}
+                <div class="profile-message {% if message.tags %}profile-message--{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="profile-layout">
+        <!-- Левая колонка: Аватар и основная инфа -->
+        <aside class="profile-sidebar">
+            <div class="profile-card">
+                <div class="profile-avatar-wrap">
+                    {% if profile_user.avatar %}
+                        <img src="{{ profile_user.avatar.url }}" alt="Аватар" class="profile-avatar-img">
+                    {% else %}
+                        <div class="profile-avatar-placeholder">
+                            {{ profile_user.username|first|upper }}
+                        </div>
+                    {% endif %}
+                    <div class="profile-rank">P1</div>
+                </div>
+
+                <h2 class="profile-username">{{ profile_user.username|upper }}</h2>
+
+                {% if profile_user.is_online %}
+                    <p class="profile-status profile-status--online">СТАТУС: ONLINE 🟢</p>
+                {% else %}
+                    <p class="profile-status profile-status--offline">СТАТУС: OFFLINE 🔴</p>
+                {% endif %}
+
+                <div class="profile-joined">
+                    В ИГРЕ С: <span>{{ profile_user.date_joined|date:"d.m.Y" }}</span>
+                </div>
+
+                <!-- Форма загрузки аватара (показываем ТОЛЬКО владельцу профиля) -->
+                {% if request.user == profile_user %}
+                    <form method="post" enctype="multipart/form-data" class="profile-avatar-form">
+                        {% csrf_token %}
+                        <label for="id_avatar" class="profile-upload-btn">
+                            📷 ЗАГРУЗИТЬ АВАТАР
+                        </label>
+                        <input type="file" id="id_avatar" name="avatar" accept="image/*" onchange="this.form.submit()" style="display: none;">
+                    </form>
+                {% endif %}
+            </div>
+        </aside>
+
+        <!-- Правая колонка: Статистика и выход -->
+        <main class="profile-main">
+            <!-- Блок статистики -->
+            <div class="profile-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">ТУРНИРОВ</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">ПОБЕД</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">МАТЧЕЙ</div>
+                </div>
+            </div>
+
+            <!-- Кнопка выхода (показываем ТОЛЬКО владельцу) -->
+            {% if request.user == profile_user %}
+                <div class="profile-danger-zone">
+                    <button onclick="ajaxLogout()" class="profile-logout-btn">ВЫЙТИ ИЗ АККАУНТА</button>
+                </div>
+            {% endif %}
+        </main>
+    </div>
+</section>
+{% endblock %}

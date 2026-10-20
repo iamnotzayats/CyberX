@@ -40,6 +40,11 @@ AUTH_USER_MODEL = 'cyberxclient.Users'
 # EMAIL_HOST_PASSWORD = 'dcnyodawedzixhim'
 # DEFAULT_FROM_EMAIL = 'CyberXGaming <твой_email@yandex.ru>'
 
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Хранить сессии в БД
+SESSION_COOKIE_AGE = 1209600  # 2 недели (в секундах)
+SESSION_SAVE_EVERY_REQUEST = True  # Продлевать сессию при каждом запросе
+
 MAILERS = {
     "default": {
         "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
@@ -77,6 +82,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'cyberxclient.middleware.UpdateLastActivityMiddleware',
 ]
 
 ROOT_URLCONF = 'cyberxadmin.urls'

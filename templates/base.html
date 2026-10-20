@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/auth_modal.css' %}">
     <link rel="stylesheet" href="{% static 'css/password_reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
 
@@ -55,7 +56,7 @@
 
                     <!-- Выпадающее меню -->
                     <div class="gh-user__dropdown" id="profile-dropdown">
-                        <a href="#" class="gh-user__dropdown-item">МОЙ ПРОФИЛЬ</a>
+                        <a href="{% url 'profile' user.username %}" class="gh-user__dropdown-item">МОЙ ПРОФИЛЬ</a>
                         <div class="gh-user__dropdown-divider"></div>
                         <button class="gh-user__dropdown-item gh-user__dropdown-item--logout" onclick="ajaxLogout()">ВЫЙТИ</button>
                     </div>

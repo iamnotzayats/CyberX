@@ -3,7 +3,7 @@ import traceback
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.db.models import Prefetch
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
@@ -16,6 +16,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.core.mail import EmailMultiAlternatives
 
 from .models import *
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def home(request):
@@ -266,3 +268,19 @@ def reset_password_page(request, uidb64, token):
         return render(request, 'password_reset_confirm.html', {'form': form})
     else:
         return render(request, 'password_reset_invalid.html')
+
+
+
+#@login_required(login_url='/')
+def profile(request, username):
+    profile_user = get_object_or_404(Users, username=username)
+
+    if request.user.is_authenticated:
+        request.user.last_activity = timezone.now()
+        request.user.save(update_fields=['last_activity'])
+
+    # 3. Передаем профиль этого пользователя в шаблон
+    return render(request, 'profile.html', {
+        'page_title': f'Профиль — {profile_user.username}',
+        'profile_user': profile_user, # <-- Передаем того, чей профиль открыт
+    })
