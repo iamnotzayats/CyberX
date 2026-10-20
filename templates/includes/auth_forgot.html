@@ -1,0 +1,25 @@
+<div class="auth-modal" id="forgot-modal" aria-hidden="true">
+    <div class="auth-modal__overlay" onclick="closeForgotModal()"></div>
+    <div class="auth-modal__window">
+        <button class="auth-modal__close" onclick="closeForgotModal()" aria-label="Закрыть">✖</button>
+
+        <h2 class="auth-modal__title">СБРОС ПАРОЛЯ</h2>
+
+        <form id="forgot-form" class="auth-modal__form">
+            {% csrf_token %}
+            <div class="auth-modal__group">
+                <label for="forgot_email">ВАШ EMAIL</label>
+                <input type="email" id="forgot_email" name="email" required placeholder="player@cyberxgaming.ru">
+            </div>
+
+            <div class="auth-modal__error" id="forgot-error"></div>
+            <div class="auth-modal__success" id="forgot-success" style="display:none; color: var(--neon-green); font-family: var(--font-pixel); font-size: 9px; text-align: center; margin-top: 10px;"></div>
+
+            <button type="submit" class="auth-modal__submit" id="forgot-submit">ОТПРАВИТЬ ССЫЛКУ ▸</button>
+        </form>
+
+        <div class="auth-modal__footer">
+            <a href="#" class="auth-modal__link" onclick="closeForgotModal(); openAuthModal(); return false;">ВЕРНУТЬСЯ КО ВХОДУ</a>
+        </div>
+    </div>
+</div>

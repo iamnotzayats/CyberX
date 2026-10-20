@@ -32,6 +32,33 @@ ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'cyberxclient.Users'
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_USE_SSL = True
+# EMAIL_HOST_USER = 'cyberxgaming@yandex.ru'
+# EMAIL_HOST_PASSWORD = 'dcnyodawedzixhim'
+# DEFAULT_FROM_EMAIL = 'CyberXGaming <твой_email@yandex.ru>'
+
+MAILERS = {
+    "default": {
+        "BACKEND": "django.core.mail.backends.smtp.EmailBackend",
+        "OPTIONS": {
+            "host": "smtp.yandex.ru",
+            "port": 465,
+            "use_ssl": True,
+            "username": "cyberxgaming@yandex.ru",   # Полный адрес почты
+            "password": "dcnyodawedzixhim",  # <-- Вставь сюда
+        },
+    },
+}
+DEFAULT_FROM_EMAIL = 'CyberXGaming <cyberxgaming@yandex.ru>'
+PASSWORD_RESET_TIMEOUT = 86400
+
+# Ссылка для восстановления (она будет в письме)
+SITE_URL = 'http://127.0.0.1:8000'  # Потом поменяешь на боевой домен
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,12 +160,3 @@ MEDIA_URL = '/media/'
 # Путь к папке на диске, где будут лежать файлы
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-# Email
-# https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
-
-MAILERS = {
-    'default': {
-        'BACKEND': 'django.core.mail.backends.console.EmailBackend',
-    },
-}

@@ -32,3 +32,4 @@ class NewsAdmin(admin.ModelAdmin):
 admin.site.register(NewsCategory)
 admin.site.register(NewsPicture)
 admin.site.register(Badge)
+admin.site.register(Disciplines)

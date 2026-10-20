@@ -1,0 +1,39 @@
+<div class="auth-modal" id="register-modal" aria-hidden="true">
+    <div class="auth-modal__overlay" onclick="closeRegisterModal()"></div>
+    <div class="auth-modal__window">
+        <button class="auth-modal__close" onclick="closeRegisterModal()" aria-label="Закрыть">✖</button>
+
+        <h2 class="auth-modal__title">РЕГИСТРАЦИЯ</h2>
+
+        <form id="register-form" class="auth-modal__form">
+            {% csrf_token %}
+
+            <div class="auth-modal__group">
+                <label for="reg_username">ЛОГИН</label>
+                <input type="text" id="reg_username" name="username" required autocomplete="username" placeholder="PLAYER_1">
+            </div>
+
+            <div class="auth-modal__group">
+                <label for="reg_email">EMAIL</label>
+                <input type="email" id="reg_email" name="email" required autocomplete="email" placeholder="player@cyberxgaming.ru">
+            </div>
+
+            <div class="auth-modal__group">
+                <label for="reg_password">ПАРОЛЬ</label>
+                <input type="password" id="reg_password" name="password" required autocomplete="new-password" placeholder="********">
+            </div>
+            <div class="auth-modal__group">
+                <label for="reg_password_confirm">ПОВТОРИТЕ ПАРОЛЬ</label>
+                <input type="password" id="reg_password_confirm" name="password_confirm" required autocomplete="new-password" placeholder="********">
+            </div>
+
+            <div class="auth-modal__error" id="register-error"></div>
+
+            <button type="submit" class="auth-modal__submit">СОЗДАТЬ АККАУНТ ▸</button>
+        </form>
+
+        <div class="auth-modal__footer">
+            Уже есть аккаунт? <a href="#" class="auth-modal__link" onclick="closeRegisterModal(); openAuthModal(); return false;">ВОЙТИ</a>
+        </div>
+    </div>
+</div>

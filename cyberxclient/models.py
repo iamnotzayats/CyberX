@@ -40,16 +40,23 @@ def news_image_upload_to(instance, filename):
     return f"images/news/{now:%Y/%m/%d}/{base}-{unique_id}{ext}"
 
 
+def disciplines_image_upload_to(instance, filename):
+    ext = os.path.splitext(filename)[1].lower()
+    unique_id = uuid.uuid4().hex[:8]
+    base = slugify(instance.name) or "discipline"
+    return f"images/disciplines/{base}-{unique_id}{ext}"
+
+
 class NewsPicture(models.Model):
     image = models.ImageField(upload_to=news_image_upload_to, null=True, blank=True)
     news = models.ForeignKey(
         'News',
         on_delete=models.CASCADE,
-        related_name='pictures',   # ← обратное имя
+        related_name='pictures',
     )
 
     class Meta:
-        ordering = ('id',)         # ← первая картинка = минимальный id
+        ordering = ('id',)
 
     def __str__(self):
         return f'{self.news.title} - {self.image}'
@@ -95,9 +102,19 @@ class News(models.Model):
 
     @property
     def main_image(self):
-        """Первая картинка новости (по id) или None."""
         return self.pictures.first()
 
     def __str__(self):
         return self.title
-        return self.title
+
+
+class Disciplines(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to=disciplines_image_upload_to, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Дисциплина"
+        verbose_name_plural = "Дисциплины"
+
+    def __str__(self):
+        return self.name

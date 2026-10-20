@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Дисциплины — CyberXGaming{% endblock %}
+
+{% block content %}
+<section class="disciplines">
+    <header class="disciplines__header">
+        <h1 class="disciplines__title">🎮 ВЫБЕРИ СВОЮ АРЕНУ</h1>
+        <p class="disciplines__subtitle">Дисциплины, по которым проходят турниры</p>
+    </header>
+
+    {% if disciplines %}
+        <div class="disciplines__grid">
+            {% for discipline in disciplines %}
+                <a href="{% url 'all_news' %}?discipline={{ discipline.id }}" class="discipline-card">
+                    <!-- Картинка дисциплины -->
+                    <div class="discipline-card__image">
+                        {% if discipline.image %}
+                            <img src="{{ discipline.image.url }}"
+                                 alt="{{ discipline.name }}"
+                                 loading="lazy">
+                        {% else %}
+                            <span class="discipline-card__placeholder">🎮</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Название -->
+                    <div class="discipline-card__content">
+                        <h3 class="discipline-card__name">{{ discipline.name|upper }}</h3>
+
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- Заглушка, если дисциплин нет -->
+        <div class="empty-news">
+            <div class="empty-news__icon">👾</div>
+            <h3 class="empty-news__title">НЕТ ДОСТУПНЫХ ДИСЦИПЛИН</h3>
+            <p class="empty-news__text">Скоро здесь появятся новые дисциплины. Следите за новостями!</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

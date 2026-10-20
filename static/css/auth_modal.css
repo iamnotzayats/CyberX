@@ -1,0 +1,269 @@
+/* ============================================================
+   МОДАЛЬНЫЕ ОКНА АВТОРИЗАЦИИ И РЕГИСТРАЦИИ (ARCADE LOGIN)
+   ============================================================ */
+.auth-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.auth-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Затемнение фона */
+.auth-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 0, 20, 0.85);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+}
+
+/* Само окно */
+.auth-modal__window {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 420px;
+    margin: 20px;
+    background: var(--bg-header);
+    border: 3px solid var(--neon-cyan);
+    box-shadow:
+        0 0 30px rgba(0, 255, 255, 0.4),
+        inset 0 0 30px rgba(0, 255, 255, 0.1);
+    padding: 25px 30px 30px;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Скролл для маленьких экранов с высоким контентом (регистрация) */
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.auth-modal.is-open .auth-modal__window {
+    transform: translateY(0) scale(1);
+}
+
+/* Скан-линии поверх окна */
+.auth-modal__window::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,.1) 3px,
+        rgba(0,0,0,.1) 4px
+    );
+    mix-blend-mode: multiply;
+    z-index: 1;
+}
+
+/* Кнопка закрытия */
+.auth-modal__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: var(--bg-inset);
+    border: 2px solid var(--neon-magenta);
+    color: var(--neon-magenta);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    z-index: 20;
+}
+.auth-modal__close:hover {
+    background: var(--neon-magenta);
+    color: #0b0014;
+    box-shadow: 0 0 12px var(--neon-magenta);
+}
+
+/* Заголовок */
+.auth-modal__title {
+    font-family: var(--font-pixel);
+    font-size: 18px;
+    color: var(--neon-yellow);
+    text-shadow: 2px 2px 0 var(--neon-magenta), -2px -2px 0 var(--neon-cyan);
+    text-align: center;
+    margin: 0 0 25px 0;
+    letter-spacing: .05em;
+    animation: title-jitter 3s steps(2) infinite;
+}
+
+/* Форма */
+.auth-modal__form {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Уменьшили общий отступ между элементами */
+}
+
+.auth-modal__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.auth-modal__group label {
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    color: var(--neon-cyan);
+    letter-spacing: .1em;
+    text-shadow: 0 0 4px rgba(0,255,255,.6);
+}
+
+.auth-modal__group input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg-inset);
+    border: 2px solid var(--border-dim);
+    color: var(--neon-green);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.auth-modal__group input::placeholder {
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.auth-modal__group input:focus {
+    border-color: var(--neon-green);
+    box-shadow:
+        inset 0 0 0 1px rgba(57,255,20,.3),
+        0 0 12px rgba(57,255,20,.4);
+}
+
+/* Блок со ссылкой "Забыли пароль?" */
+.auth-modal__forgot-wrap {
+    text-align: right;
+    margin-top: -4px; /* Подтягиваем ссылку ближе к полю пароля */
+    margin-bottom: 4px;
+}
+
+.auth-modal__forgot-wrap .auth-modal__link {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    letter-spacing: 0.05em;
+}
+
+/* Ошибка */
+.auth-modal__error {
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    color: var(--neon-magenta);
+    text-align: center;
+    min-height: 0; /* Убираем пустую высоту, если ошибки нет */
+    text-shadow: 0 0 8px var(--neon-magenta);
+    transition: min-height 0.2s ease;
+}
+
+/* Если ошибка появилась (текст не пустой), добавляем отступ */
+.auth-modal__error:not(:empty) {
+    min-height: 20px;
+    margin-bottom: 8px;
+}
+
+/* Кнопка отправки */
+.auth-modal__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px;
+    font-family: var(--font-pixel);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #0b0014;
+    background: var(--neon-yellow);
+    border: none;
+    cursor: pointer;
+    box-shadow:
+        4px 4px 0 var(--neon-magenta),
+        0 0 16px var(--neon-yellow);
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+    margin-top: 4px; /* Уменьшили отступ сверху у кнопки */
+}
+
+.auth-modal__submit:hover {
+    filter: brightness(1.15);
+    transform: translate(-1px, -1px);
+    box-shadow:
+        4px 4px 0 var(--neon-magenta),
+        0 0 24px var(--neon-yellow);
+}
+
+.auth-modal__submit:active {
+    transform: translate(3px, 3px);
+    box-shadow:
+        1px 1px 0 var(--neon-magenta),
+        0 0 8px var(--neon-yellow);
+}
+
+.auth-modal__submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Футер окна (для блока регистрации в самом низу) */
+.auth-modal__footer {
+    position: relative;
+    z-index: 20;
+    margin-top: 16px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--fg-muted);
+}
+
+.auth-modal__link {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    text-shadow: 0 0 4px rgba(0,255,255,.6);
+    transition: color var(--transition), text-shadow var(--transition);
+}
+
+.auth-modal__link:hover {
+    color: var(--neon-yellow);
+    text-shadow: var(--glow-yellow);
+}
+
+/* Анимация "тряски" при ошибке */
+@keyframes shake {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-8px); }
+    50%  { transform: translateX(8px); }
+    75%  { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .auth-modal__window {
+        padding: 20px 20px 20px;
+    }
+    .auth-modal__title {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+}

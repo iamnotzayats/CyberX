@@ -11,6 +11,16 @@ urlpatterns = [
     # Маршруты для новостей
     path('news/', views.all_news, name='all_news'),
     path('news/<slug:slug>', views.get_news_page, name='get_news_page'),
+
+    # Маршруты для диспицлин
+    path('disciplines/', views.disciplines, name='disciplines'),
+
+    # Маршруты для авторизации/регистрации
+    path('ajax/login/', views.ajax_login, name='ajax_login'),
+    path('ajax/register/', views.ajax_register, name='ajax_register'),
+    path('ajax/logout/', views.ajax_logout, name='ajax_logout'),
+    path('ajax/password-reset/', views.ajax_password_reset, name='ajax_password_reset'),
+    path('reset/<uidb64>/<token>/', views.reset_password_page, name='reset_password_page'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

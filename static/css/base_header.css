@@ -33,7 +33,6 @@
 
 * { box-sizing: border-box; }
 
-/* --- ГЛОБАЛЬНЫЕ СТИЛИ И ПРИЖАТИЕ ФУТЕРА --- */
 body {
     margin: 0;
     font-family: var(--font-mono);
@@ -237,8 +236,15 @@ h1, h2 {
     display: flex;
     align-items: center;
     gap: 12px;
-    text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
     transition: transform var(--transition);
+    font-family: inherit;
+}
+.gh-user__profile:hover {
+    transform: translateY(-1px);
 }
 
 .gh-user__name {
@@ -289,6 +295,72 @@ h1, h2 {
 .gh-user__profile:hover .gh-user__avatar {
     transform: scale(1.06);
     box-shadow: 0 0 20px var(--neon-yellow), 0 0 40px rgba(255,255,0,.5);
+}
+
+/* ---------- Выпадающее меню профиля ---------- */
+.gh-user__dropdown-wrap {
+    position: relative;
+}
+
+.gh-user__dropdown {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: 220px;
+    background: var(--bg-header);
+    border: 2px solid var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+.gh-user__dropdown.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gh-user__dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--neon-cyan);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--transition), color var(--transition), padding-left var(--transition);
+    letter-spacing: .05em;
+    width: 100%;
+}
+.gh-user__dropdown-item:hover {
+    background: var(--bg-inset);
+    color: var(--neon-yellow);
+    padding-left: 18px;
+}
+
+.gh-user__dropdown-item--logout {
+    color: var(--neon-magenta);
+}
+.gh-user__dropdown-item--logout:hover {
+    color: var(--neon-yellow);
+    background: rgba(255, 0, 255, 0.1);
+}
+
+.gh-user__dropdown-divider {
+    height: 2px;
+    background: var(--border-dim);
+    margin: 6px 0;
+    width: 100%;
 }
 
 /* ---------- Кнопки Вход / Регистрация ---------- */
@@ -381,22 +453,44 @@ h1, h2 {
     }
 
     .gh-brand__name { font-size: 10px; }
+
+    /* Скрываем текстовое имя (оставляем аватарку) */
     .gh-user__name { display: none; }
 
-    .gh-user {
-        margin-left: 0;
-        margin-right: auto;
+    /* Обертка профиля остается видимой */
+    .gh-user__dropdown-wrap {
+        display: block;
+        position: relative;
     }
 
+    /* Корректируем положение меню на мобильных */
+    .gh-user__dropdown {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 200px;
+        padding: 6px;
+    }
+
+    .gh-user__dropdown-item {
+        padding: 12px 14px;
+        font-size: 10px;
+    }
+
+    /* Кнопки входа/регистрации */
+    .gh-auth-buttons {
+        display: flex;
+    }
+
+    /* Бургер всегда прижат к правому краю */
     .gh-burger {
         display: flex;
         margin-left: auto;
     }
 
-    /* ИСПРАВЛЕННОЕ ВЫПАДАЮЩЕЕ МЕНЮ */
     .gh-nav {
-        position: absolute; /* Меняем fixed на absolute */
-        top: 100%; /* Открывается строго под шапкой */
+        position: absolute;
+        top: 100%;
         left: 0;
         right: 0;
         flex-direction: column;
@@ -410,8 +504,6 @@ h1, h2 {
         pointer-events: none;
         transition: opacity var(--transition), transform var(--transition);
         z-index: 9999;
-        width: 100%;
-        box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
     }
 
     .gh-nav.is-open {

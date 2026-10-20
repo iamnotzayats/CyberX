@@ -13,9 +13,12 @@
     <!-- Подключение стилей -->
     <link rel="stylesheet" href="{% static 'css/base_header.css' %}">
     <link rel="stylesheet" href="{% static 'css/news.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/news_page.css' %}">
     <link rel="stylesheet" href="{% static 'css/all_news.css' %}">
+    <link rel="stylesheet" href="{% static 'css/disciplines.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth_modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/password_reset.css' %}">
 </head>
 <body>
 
@@ -34,24 +37,34 @@
 
         <!-- Навигация -->
         <nav class="gh-nav" aria-label="Основная навигация">
-            <a href="#" class="gh-nav__link">Дисциплины</a>
+            <a href="{% url 'disciplines' %}" class="gh-nav__link">Дисциплины</a>
+            <a href="{% url 'all_news' %}" class="gh-nav__link">Новости</a>
         </nav>
 
         <!-- Профиль / Авторизация -->
         <div class="gh-user">
             {% if user.is_authenticated %}
                 <!-- Если пользователь авторизован -->
-                <a href="" class="gh-user__profile" aria-label="Профиль">
-                    <span class="gh-user__name">{{ user.username }}</span>
-                    <span class="gh-user__avatar">
-                        <span>{{ user.username|first|upper }}</span>
-                    </span>
-                </a>
+                <div class="gh-user__dropdown-wrap">
+                    <button class="gh-user__profile" id="profile-toggle" aria-label="Меню профиля">
+                        <span class="gh-user__name">{{ user.username }}</span>
+                        <span class="gh-user__avatar">
+                            <span>{{ user.username|first|upper }}</span>
+                        </span>
+                    </button>
+
+                    <!-- Выпадающее меню -->
+                    <div class="gh-user__dropdown" id="profile-dropdown">
+                        <a href="#" class="gh-user__dropdown-item">МОЙ ПРОФИЛЬ</a>
+                        <div class="gh-user__dropdown-divider"></div>
+                        <button class="gh-user__dropdown-item gh-user__dropdown-item--logout" onclick="ajaxLogout()">ВЫЙТИ</button>
+                    </div>
+                </div>
             {% else %}
                 <!-- Если гость -->
                 <div class="gh-auth-buttons">
-                    <a href="" class="gh-btn gh-btn--login">Вход</a>
-                    <a href="" class="gh-btn gh-btn--register">Регистрация</a>
+                    <button type="button" class="gh-btn gh-btn--login" onclick="openAuthModal()">Вход</button>
+                    <button type="button" class="gh-btn gh-btn--register" onclick="openRegisterModal()">Регистрация</button>
                 </div>
             {% endif %}
         </div>
@@ -109,15 +122,67 @@
     </div>
 </footer>
 
+<!-- Модальные окна -->
+{% include 'includes/auth_modal.html' %}
+{% include 'includes/auth_register.html' %}
+{% include 'includes/auth_forgot.html' %}
+
+<!-- Скрипт бургер-меню, выпадающего меню и AJAX-выхода -->
 <script>
-    const burger = document.querySelector('.gh-burger');
-    const nav = document.querySelector('.gh-nav');
-    if (burger) {
-        burger.addEventListener('click', () => {
-            const open = nav.classList.toggle('is-open');
-            burger.setAttribute('aria-expanded', open);
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Бургер-меню ---
+        const burger = document.querySelector('.gh-burger');
+        const nav = document.querySelector('.gh-nav');
+
+        if (burger && nav) {
+            burger.addEventListener('click', () => {
+                const isOpen = nav.classList.toggle('is-open');
+                burger.setAttribute('aria-expanded', isOpen);
+            });
+        }
+
+        // --- Выпадающее меню профиля ---
+        const profileToggle = document.getElementById('profile-toggle');
+        const profileDropdown = document.getElementById('profile-dropdown');
+
+        if (profileToggle && profileDropdown) {
+            profileToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('is-open');
+            });
+
+            // Закрываем меню при клике вне его
+            document.addEventListener('click', (e) => {
+                if (!profileDropdown.contains(e.target) && e.target !== profileToggle) {
+                    profileDropdown.classList.remove('is-open');
+                }
+            });
+        }
+    });
+
+    // --- AJAX Выход ---
+    function ajaxLogout() {
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value ||
+                          document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1];
+
+        fetch('/ajax/logout/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                window.location.reload();
+            }
+        })
+        .catch(error => console.error('Ошибка выхода:', error));
     }
 </script>
+
+<!-- Скрипт модалки авторизации и регистрации -->
+<script src="{% static 'js/auth_modal.js' %}"></script>
+
 </body>
 </html>

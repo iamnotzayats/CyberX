@@ -1,0 +1,34 @@
+<div class="auth-modal" id="auth-modal" aria-hidden="true">
+    <div class="auth-modal__overlay" onclick="closeAuthModal()"></div>
+    <div class="auth-modal__window">
+        <button class="auth-modal__close" onclick="closeAuthModal()" aria-label="Закрыть">✖</button>
+
+        <h2 class="auth-modal__title">ВХОД В СИСТЕМУ</h2>
+
+        <form id="auth-form" class="auth-modal__form">
+            {% csrf_token %}
+            <div class="auth-modal__group">
+                <label for="id_username">ЛОГИН</label>
+                <input type="text" id="id_username" name="username" required autocomplete="username" placeholder="PLAYER_1">
+            </div>
+            <div class="auth-modal__group">
+                <label for="id_password">ПАРОЛЬ</label>
+                <input type="password" id="id_password" name="password" required autocomplete="current-password" placeholder="********">
+            </div>
+
+            <!-- Ссылка "Забыли пароль" -->
+            <div class="auth-modal__forgot-wrap">
+                <a href="#" class="auth-modal__link" onclick="closeAuthModal(); openForgotModal(); return false;">ЗАБЫЛИ ПАРОЛЬ?</a>
+            </div>
+
+            <!-- Блок ошибки (он будет пустым, пока не появится ошибка) -->
+            <div class="auth-modal__error" id="auth-error"></div>
+
+            <button type="submit" class="auth-modal__submit">ПОДТВЕРДИТЬ ▸</button>
+        </form>
+
+        <div class="auth-modal__footer">
+            Нет аккаунта? <a href="#" class="auth-modal__link" onclick="closeAuthModal(); openRegisterModal(); return false;">РЕГИСТРАЦИЯ</a>
+        </div>
+    </div>
+</div>
