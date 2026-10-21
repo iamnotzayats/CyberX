@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="admin-card admin-card--danger">
+        <h1 class="admin-title admin-title--danger">⚠ УДАЛЕНИЕ НОВОСТИ</h1>
+        
+        <p class="admin-text">
+            Вы уверены, что хотите навсегда удалить новость:<br>
+            <strong>«{{ news.title }}»</strong>?
+        </p>
+        <p class="admin-text admin-text--warning">
+            Это действие нельзя отменить.
+        </p>
+
+        <form method="post" action="{% url 'news_delete' news.id %}" class="admin-actions">
+            {% csrf_token %}
+            <button type="submit" class="admin-btn admin-btn--delete">ДА, УДАЛИТЬ</button>
+            <a href="{% url 'get_news_page' news.slug %}" class="admin-btn admin-btn--cancel">ОТМЕНА</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

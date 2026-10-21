@@ -11,6 +11,10 @@ urlpatterns = [
     # Маршруты для новостей
     path('news/', views.all_news, name='all_news'),
     path('news/<slug:slug>', views.get_news_page, name='get_news_page'),
+    path('news/<int:pk>/edit/', views.news_edit, name='news_edit'),
+    path('news/<int:pk>/delete/', views.news_delete_confirm, name='news_delete_confirm'),
+    path('news/<int:pk>/delete/confirm/', views.news_delete, name='news_delete'),
+    path('news/image/<int:image_id>/delete/', views.news_image_delete, name='news_image_delete'),
 
     # Маршруты для диспицлин
     path('disciplines/', views.disciplines, name='disciplines'),

@@ -1,10 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="admin-page">
+    <!-- Блок сообщений -->
+    {% if messages %}
+        <div class="admin-messages">
+            {% for message in messages %}
+                <div class="admin-message admin-message--{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="admin-card">
+        <h1 class="admin-title">✎ РЕДАКТИРОВАНИЕ НОВОСТИ</h1>
+
+        <form method="post" class="admin-form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="admin-form-group">
+                    <label>{{ field.label|upper }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="admin-form-error">{{ field.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="admin-form-group">
+                <label>ГАЛЕРЕЯ (ДОБАВИТЬ НОВЫЕ)</label>
+                <input type="file" name="images" multiple accept="image/*" class="arcade-file-input">
+            </div>
+
+            {% if news.pictures.all %}
+                <div class="admin-current-images">
+                    <h3 class="admin-form-group label">ТЕКУЩИЕ КАРТИНКИ</h3>
+                    <div class="admin-images-grid">
+                        {% for pic in news.pictures.all %}
+                            <div class="admin-image-item">
+                                <img src="{{ pic.image.url }}" alt="Фото">
+                                <button type="submit" formaction="{% url 'news_image_delete' pic.id %}" class="admin-image-delete-btn" title="Удалить это фото">
+                                    ✖
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="admin-actions">
+                <button type="submit" class="admin-submit-btn">СОХРАНИТЬ ▸</button>
+                <a href="{% url 'get_news_page' news.slug %}" class="admin-cancel-btn">ОТМЕНА</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
