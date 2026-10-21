@@ -16,7 +16,7 @@ from django.contrib.auth.forms import SetPasswordForm
 from django.utils.http import urlsafe_base64_decode
 
 from .models import *
-from .forms import NewsForm
+from .forms import NewsForm, DisciplineForm
 
 
 # --- ГЛАВНАЯ ---
@@ -268,3 +268,61 @@ def news_image_delete(request, image_id):
         image.delete()
         return redirect('news_edit', pk=news_id)
     return redirect('home')
+
+
+@permission_required('cyberxclient.add_disciplines', raise_exception=True)
+def discipline_create(request):
+    if request.method == 'POST':
+        form = DisciplineForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'ДИСЦИПЛИНА ДОБАВЛЕНА!')
+            return redirect('disciplines')
+    else:
+        form = DisciplineForm()
+
+    return render(request, 'discipline_form.html', {
+        'form': form,
+        'title': 'ДОБАВЛЕНИЕ ДИСЦИПЛИНЫ',
+        'is_edit': False
+    })
+
+
+@permission_required('cyberxclient.change_disciplines', raise_exception=True)
+def discipline_edit(request, pk):
+    discipline = get_object_or_404(Disciplines, pk=pk)
+
+    if request.method == 'POST':
+        form = DisciplineForm(request.POST, request.FILES, instance=discipline)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'ДИСЦИПЛИНА ОБНОВЛЕНА!')
+            return redirect('disciplines')
+    else:
+        form = DisciplineForm(instance=discipline)
+
+    return render(request, 'discipline_form.html', {
+        'form': form,
+        'title': 'РЕДАКТИРОВАНИЕ ДИСЦИПЛИНЫ',
+        'is_edit': True,
+        'discipline': discipline
+    })
+
+
+@permission_required('cyberxclient.delete_disciplines', raise_exception=True)
+def discipline_delete_confirm(request, pk):
+    discipline = get_object_or_404(Disciplines, pk=pk)
+    return render(request, 'discipline_delete.html', {
+        'discipline': discipline,
+        'page_title': f'Удаление — {discipline.name}'
+    })
+
+
+@permission_required('cyberxclient.delete_disciplines', raise_exception=True)
+def discipline_delete(request, pk):
+    discipline = get_object_or_404(Disciplines, pk=pk)
+    if request.method == 'POST':
+        discipline.delete()
+        messages.success(request, 'ДИСЦИПЛИНА УДАЛЕНА!')
+        return redirect('disciplines')
+    return redirect('discipline_delete_confirm', pk=pk)

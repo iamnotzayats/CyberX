@@ -8,18 +8,23 @@
     <header class="disciplines__header">
         <h1 class="disciplines__title">🎮 ВЫБЕРИ СВОЮ АРЕНУ</h1>
         <p class="disciplines__subtitle">Дисциплины, по которым проходят турниры</p>
+
+        <!-- 👇 КНОПКА ДОБАВЛЕНИЯ (только для админов) 👇 -->
+        {% if perms.cyberxclient.add_disciplines %}
+            <div class="disciplines__admin-bar">
+                <a href="{% url 'discipline_create' %}" class="admin-btn admin-btn--add">+ ДОБАВИТЬ ДИСЦИПЛИНУ</a>
+            </div>
+        {% endif %}
     </header>
 
     {% if disciplines %}
         <div class="disciplines__grid">
             {% for discipline in disciplines %}
-                <a href="{% url 'all_news' %}?discipline={{ discipline.id }}" class="discipline-card">
+                <div class="discipline-card">
                     <!-- Картинка дисциплины -->
                     <div class="discipline-card__image">
                         {% if discipline.image %}
-                            <img src="{{ discipline.image.url }}"
-                                 alt="{{ discipline.name }}"
-                                 loading="lazy">
+                            <img src="{{ discipline.image.url }}" alt="{{ discipline.name }}" loading="lazy">
                         {% else %}
                             <span class="discipline-card__placeholder">🎮</span>
                         {% endif %}
@@ -29,8 +34,19 @@
                     <div class="discipline-card__content">
                         <h3 class="discipline-card__name">{{ discipline.name|upper }}</h3>
 
+                        <!-- 👇 КНОПКИ УПРАВЛЕНИЯ (только для админов) 👇 -->
+                        {% if perms.cyberxclient.change_disciplines or perms.cyberxclient.delete_disciplines %}
+                            <div class="discipline-card__admin-actions">
+                                {% if perms.cyberxclient.change_disciplines %}
+                                    <a href="{% url 'discipline_edit' discipline.id %}" class="admin-btn admin-btn--edit" title="Редактировать">✎</a>
+                                {% endif %}
+                                {% if perms.cyberxclient.delete_disciplines %}
+                                    <a href="{% url 'discipline_delete_confirm' discipline.id %}" class="admin-btn admin-btn--delete" title="Удалить">🗑</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     </div>
-                </a>
+                </div>
             {% endfor %}
         </div>
     {% else %}

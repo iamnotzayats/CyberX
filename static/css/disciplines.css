@@ -19,10 +19,7 @@
     font-family: var(--font-pixel);
     font-size: 28px;
     color: var(--neon-yellow);
-    text-shadow:
-        3px 3px 0 var(--neon-magenta),
-        -3px -3px 0 var(--neon-cyan),
-        0 0 20px rgba(255,255,0,.5);
+    text-shadow: 3px 3px 0 var(--neon-magenta), -3px -3px 0 var(--neon-cyan), 0 0 20px rgba(255,255,0,.5);
     margin: 0 0 12px 0;
     letter-spacing: .05em;
     animation: title-jitter 3s steps(2) infinite;
@@ -35,6 +32,25 @@
     margin: 0;
     letter-spacing: .1em;
     text-transform: uppercase;
+}
+
+/* Кнопка добавления */
+.disciplines__admin-bar {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-btn--add {
+    background: var(--neon-cyan);
+    color: #0b0014;
+    box-shadow: 3px 3px 0 var(--neon-magenta), 0 0 15px rgba(0,255,255,0.4);
+    padding: 12px 20px;
+    font-size: 10px;
+}
+.admin-btn--add:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--neon-magenta), 0 0 25px rgba(0,255,255,0.6);
 }
 
 /* ---------- Сетка карточек ---------- */
@@ -51,11 +67,8 @@
     flex-direction: column;
     background: var(--bg-header);
     border: 3px solid var(--border-dim);
-    text-decoration: none;
-    color: var(--fg-default);
     overflow: hidden;
     transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-    cursor: pointer;
 }
 
 /* CRT-скан-линии поверх карточки */
@@ -64,13 +77,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,0,0,0) 0px,
-        rgba(0,0,0,0) 2px,
-        rgba(0,0,0,.08) 3px,
-        rgba(0,0,0,.08) 4px
-    );
+    background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,.08) 3px, rgba(0,0,0,.08) 4px);
     z-index: 3;
     mix-blend-mode: multiply;
 }
@@ -78,10 +85,7 @@
 .discipline-card:hover {
     transform: translateY(-6px);
     border-color: var(--neon-cyan);
-    box-shadow:
-        0 0 20px var(--neon-cyan),
-        0 0 40px rgba(0, 255, 255, 0.3),
-        inset 0 0 20px rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 20px var(--neon-cyan), 0 0 40px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
 /* ---------- Картинка ---------- */
@@ -89,14 +93,7 @@
     position: relative;
     width: 100%;
     height: 240px;
-    background:
-        repeating-linear-gradient(
-            45deg,
-            var(--bg-inset),
-            var(--bg-inset) 10px,
-            var(--bg-hover) 10px,
-            var(--bg-hover) 20px
-        );
+    background: repeating-linear-gradient(45deg, var(--bg-inset), var(--bg-inset) 10px, var(--bg-hover) 10px, var(--bg-hover) 20px);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -135,6 +132,7 @@
     transition: border-color var(--transition);
     position: relative;
     z-index: 4;
+    flex: 1; /* Чтобы карточки были одинаковой высоты */
 }
 
 .discipline-card:hover .discipline-card__content {
@@ -147,77 +145,40 @@
     line-height: 1.4;
     color: var(--neon-yellow);
     margin: 0;
-    text-shadow:
-        2px 2px 0 var(--neon-magenta),
-        -2px -2px 0 var(--neon-cyan);
+    text-shadow: 2px 2px 0 var(--neon-magenta), -2px -2px 0 var(--neon-cyan);
     letter-spacing: .05em;
     transition: text-shadow var(--transition);
 }
 
 .discipline-card:hover .discipline-card__name {
-    text-shadow:
-        2px 2px 0 var(--neon-magenta),
-        -2px -2px 0 var(--neon-cyan),
-        0 0 15px rgba(255,255,0,.6);
+    text-shadow: 2px 2px 0 var(--neon-magenta), -2px -2px 0 var(--neon-cyan), 0 0 15px rgba(255,255,0,.6);
 }
 
-/* Кнопка "Играть" */
-.discipline-card__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 18px;
-    font-family: var(--font-pixel);
-    font-size: 9px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: #0b0014;
-    background: var(--neon-cyan);
-    box-shadow:
-        3px 3px 0 var(--neon-magenta),
-        0 0 12px var(--neon-cyan);
-    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
-    opacity: 0.9;
+/* Кнопки управления (админ) */
+.discipline-card__admin-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto; /* Прижимаем к низу */
 }
 
-.discipline-card:hover .discipline-card__btn {
-    opacity: 1;
-    filter: brightness(1.15);
-    box-shadow:
-        3px 3px 0 var(--neon-magenta),
-        0 0 20px var(--neon-cyan),
-        0 0 30px rgba(0, 255, 255, 0.4);
+.discipline-card__admin-actions .admin-btn {
+    padding: 8px 12px;
+    font-size: 14px; /* Размер для иконок */
 }
 
 /* ---------- Адаптивность ---------- */
 @media (max-width: 900px) {
-    .disciplines__title {
-        font-size: 18px;
-    }
-    .disciplines__subtitle {
-        font-size: 16px;
-    }
+    .disciplines__title { font-size: 18px; }
+    .disciplines__subtitle { font-size: 16px; }
     .disciplines__grid {
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         gap: 16px;
     }
-    .discipline-card__image {
-        height: 180px;
-    }
-    .discipline-card__name {
-        font-size: 11px;
-    }
-    .discipline-card__btn {
-        font-size: 8px;
-        padding: 8px 14px;
-    }
+    .discipline-card__image { height: 180px; }
+    .discipline-card__name { font-size: 11px; }
 }
 
 @media (max-width: 500px) {
-    .disciplines__grid {
-        grid-template-columns: 1fr;
-    }
-    .discipline-card__image {
-        height: 220px;
-    }
+    .disciplines__grid { grid-template-columns: 1fr; }
+    .discipline-card__image { height: 220px; }
 }

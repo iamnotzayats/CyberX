@@ -18,6 +18,15 @@ urlpatterns = [
 
     # Маршруты для диспицлин
     path('disciplines/', views.disciplines, name='disciplines'),
+    path('disciplines/add/', views.discipline_create, name='discipline_create'),
+    path('disciplines/<int:pk>/edit/', views.discipline_edit, name='discipline_edit'),
+
+      # 👇 СНАЧАЛА ИДЕТ ПОДТВЕРЖДЕНИЕ УДАЛЕНИЯ (с /confirm/) 👇
+    path('disciplines/<int:pk>/delete/confirm/', views.discipline_delete, name='discipline_delete'),
+
+      # 👇 ЗАТЕМ СТРАНИЦА ПОДТВЕРЖДЕНИЯ (без /confirm/) 👇
+    path('disciplines/<int:pk>/delete/', views.discipline_delete_confirm,
+        name='discipline_delete_confirm'),
 
     # Маршруты для авторизации/регистрации
     path('ajax/login/', views.ajax_login, name='ajax_login'),

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="admin-page">
+    {% if messages %}
+        <div class="admin-messages">
+            {% for message in messages %}
+                <div class="admin-message admin-message--{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="admin-card">
+        <h1 class="admin-title">{{ title }}</h1>
+        
+        <form method="post" class="admin-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="admin-form-group">
+                    <label>{{ field.label|upper }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="admin-form-error">{{ field.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <!-- Показываем текущую картинку при редактировании -->
+            {% if is_edit and discipline.image %}
+                <div class="admin-current-images">
+                    <h3 class="admin-form-group label">ТЕКУЩАЯ ОБЛОЖКА</h3>
+                    <div class="admin-images-grid">
+                        <div class="admin-image-item">
+                            <img src="{{ discipline.image.url }}" alt="Обложка">
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="admin-actions">
+                <button type="submit" class="admin-submit-btn">СОХРАНИТЬ ▸</button>
+                <a href="{% url 'disciplines' %}" class="admin-cancel-btn">ОТМЕНА</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
