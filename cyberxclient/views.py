@@ -214,7 +214,29 @@ def reset_password_page(request, uidb64, token):
         return render(request, 'password_reset_invalid.html')
 
 
-# --- РЕДАКТИРОВАНИЕ И УДАЛЕНИЕ НОВОСТЕЙ ---
+# --- УПРАВЛЕНИЕ НОВОСТЯМИ ---
+@permission_required('cyberxclient.add_news', raise_exception=True)
+def news_create(request):
+    if request.method == 'POST':
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            news = form.save()
+
+            images = request.FILES.getlist('images')
+            for img in images:
+                NewsPicture.objects.create(news=news, image=img)
+
+            messages.success(request, 'НОВОСТЬ УСПЕШНО СОЗДАНА!')
+            return redirect('all_news')
+    else:
+        form = NewsForm()
+
+    return render(request, 'news_add.html', {
+        'form': form,
+        'page_title': 'Создание новости'
+    })
+
+
 @permission_required('cyberxclient.change_news', raise_exception=True)
 def news_edit(request, pk):
     news = get_object_or_404(News, pk=pk)
@@ -229,7 +251,6 @@ def news_edit(request, pk):
                 NewsPicture.objects.create(news=news, image=img)
 
             messages.success(request, 'НОВОСТЬ УСПЕШНО СОХРАНЕНА!')
-
             return redirect('news_edit', pk=news.pk)
     else:
         form = NewsForm(instance=news)
@@ -259,7 +280,6 @@ def news_delete(request, pk):
     return redirect('news_delete_confirm', pk=pk)
 
 
-# --- УДАЛЕНИЕ КАРТИНКИ ---
 @permission_required('cyberxclient.change_news', raise_exception=True)
 def news_image_delete(request, image_id):
     if request.method == 'POST':
@@ -270,6 +290,7 @@ def news_image_delete(request, image_id):
     return redirect('home')
 
 
+# --- УПРАВЛЕНИЕ ДИСЦИПЛИНАМИ ---
 @permission_required('cyberxclient.add_disciplines', raise_exception=True)
 def discipline_create(request):
     if request.method == 'POST':

@@ -91,6 +91,12 @@
     letter-spacing: .1em;
 }
 
+.all-news__admin-bar {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
 /* ---------- Мобильная адаптация ---------- */
 @media (max-width: 900px) {
     .all-news__title {

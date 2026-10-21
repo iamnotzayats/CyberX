@@ -8,6 +8,13 @@
     <!-- Заголовок раздела -->
     <header class="all-news__header">
         <h1 class="all-news__title">📰 ВСЕ НОВОСТИ</h1>
+
+        <!-- Кнопка добавления (только для админов) -->
+        {% if perms.cyberxclient.add_news %}
+            <div class="all-news__admin-bar">
+                <a href="{% url 'news_create' %}" class="admin-btn admin-btn--add">+ ДОБАВИТЬ НОВОСТЬ</a>
+            </div>
+        {% endif %}
     </header>
 
     <!-- Сетка новостей -->
